@@ -1,6 +1,7 @@
 # Django-Insights
 
 1). Reverse function where and why to use?
+
 Given a url pattern, Django uses url() to pick the right view and generate a page. That is, url--> view name. But sometimes, like when redirecting, you need to go in the reverse direction and give Django the name of a view, and Django generates the appropriate url. In other words, view name --> url. That is, reverse() (it's the reverse of the url function). It might seem more transparent to just call it generateUrlFromViewName but that's too long and probably not general enough:
 
 
@@ -87,6 +88,8 @@ def redirect_to_year(request):
     {% endfor %}
   
 -> course_list.html
+    
+    
   {%  for object in object_list %}
         <h2><a href="{{ object.get_absolute_url}} ">{{object}}</a></h2>
   {% endfor %}
