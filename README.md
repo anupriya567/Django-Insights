@@ -4,7 +4,7 @@
 
 Use reverse instead of hardcoded uls. 
 
-Suppose we are using  get_absolute_url() method with \users and then if we change the path to \members then the application will break.
+Suppose we are using a redirect method lets say  get_absolute_url() method with \users and then if we change the path to \members then the application will break.
 But if we use reverse of url name
 At any moment we are free to change the path and the call will not break because our reverse call can still take us to the desired path.
 
