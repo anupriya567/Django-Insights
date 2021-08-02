@@ -40,7 +40,7 @@ def redirect_to_year(request):
     # ...
     return HttpResponseRedirect(reverse('news-year-archive', args=(year,)))
   
-                                               ----------------------------------------------------------------------------------
+ ...............................                                            
     
 -> Create your models here. 
     
@@ -89,5 +89,5 @@ def redirect_to_year(request):
 -> course_list.html
   {%  for object in object_list %}
         <h2><a href="{{ object.get_absolute_url}} ">{{object}}</a></h2>
-        {% endfor %}
+  {% endfor %}
   
