@@ -25,7 +25,7 @@ You can obtain these in template code by using:
 {# Or with the year in a template context variable: #}
 <ul>
 {% for yearvar in year_list %}
-<li><a href="{% url 'news-year-archive' yearvar %}">{{ yearvar }} Archive</a></li>
+<li><a href="{% url 'news-year-archive' yearvar %}">{{ yearvar }}Archive</a></li>
 {% endfor %}
 </ul>
   
