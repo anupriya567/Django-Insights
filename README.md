@@ -102,7 +102,8 @@ def redirect_to_year(request):
   
 ## 2). Database Query Optimisation
     
-    It is good to use values() rather than retrieving the whole query set which might have hundreds of fields. Only pull the data that you need.
+It is good to use values() rather than retrieving the whole query set which might have hundreds of fields. 
+Only pull the data that you need.
 -> views.py
     
     def order_list_view(request):
