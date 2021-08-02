@@ -27,8 +27,8 @@ urlpatterns = [
 According to this design, the URL for the archive corresponding to year nnnn is /articles/<nnnn>/.
 You can obtain these in template code by using:
 
+    
 <a href="{% url 'news-year-archive' 2012 %}">2012 Archive</a>
-{# Or with the year in a template context variable: #}
 <ul>
 {% for yearvar in year_list %}
 <li><a href="{% url 'news-year-archive' yearvar %}">{{ yearvar }}Archive</a></li>
