@@ -2,6 +2,12 @@
 
 ## 1). Reverse function where and why to use?
 
+Use reverse instead of hardcoded uls. 
+
+Suppose we are using  get_absolute_url() method with \users and then if we change the path to \members then the application will break.
+But if we use reverse of url name
+At any moment we are free to change the path and the call will not break because our reverse call can still take us to the desired path.
+
 Given a url pattern, Django uses url() to pick the right view and generate a page. That is, url--> view name. But sometimes, like when redirecting, you need to go in the reverse direction and give Django the name of a view, and Django generates the appropriate url. In other words, view name --> url. That is, reverse() (it's the reverse of the url function). It might seem more transparent to just call it generateUrlFromViewName but that's too long and probably not general enough:
 
 
@@ -94,3 +100,33 @@ def redirect_to_year(request):
         <h2><a href="{{ object.get_absolute_url}} ">{{object}}</a></h2>
   {% endfor %}
   
+## 2). Database Query Optimisation
+    
+    It is good to use values() rather than retrieving the whole query set which might have hundreds of fields. Only pull the data that you need.
+-> views.py
+    
+    def order_list_view(request):
+         orders = Order.objects.values('number','price','quantity')
+    
+## 3). Messages Framework
+    
+-> settings.py
+    
+from django.contrib.messages import constants as messages
+
+managing django messages
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary ',
+        messages.INFO: 'alert-info ',
+        messages.SUCCESS: 'alert-success ',
+        messages.WARNING: 'alert-warning ',
+        messages.ERROR: 'alert-danger ',
+ }
+ 
+ -> views.py   
+ from django.contrib import messages 
+    
+ messages.success(request,  "Your account created successfully")
+ return redirect('/')   
+    
+    
