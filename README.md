@@ -131,4 +131,155 @@ Only pull the data that you need.
      messages.success(request,  "Your account created successfully")
      return redirect('/')   
     
+##  4). for … empty
     
+    
+The for tag can take an optional {% empty %} clause whose text is displayed if the given array is empty or could not be found:
+
+        <ul>
+        {% for athlete in athlete_list %}
+            <li>{{ athlete.name }}</li>
+        {% empty %}
+            <li>Sorry, no athletes in this list.</li>
+        {% endfor %}
+        </ul>
+    
+The above is equivalent to – but shorter, cleaner, and possibly faster than – the following:
+
+        <ul>
+          {% if athlete_list %}
+            {% for athlete in athlete_list %}
+              <li>{{ athlete.name }}</li>
+            {% endfor %}
+          {% else %}
+            <li>Sorry, no athletes in this list.</li>
+          {% endif %}
+        </ul>
+    
+## 5). Base views
+    
+The following three classes provide much of the functionality needed to create Django views. You may think of them as parent views, which can be used by themselves or inherited from. They may not provide all the capabilities required for projects, in which case there are Mixins and Generic class-based views.
+
+Many of Django’s built-in class-based views inherit from other class-based views or various mixins. Because this inheritance chain is very important, the ancestor classes are documented under the section title of Ancestors (MRO). MRO is an acronym for Method Resolution Order.
+
+View
+    
+    
+class django.views.generic.base.View
+    
+The master class-based base view. All other class-based views inherit from this base class. It isn’t strictly a generic view and thus can also be imported from django.views.
+
+Method Flowchart
+
+setup()
+dispatch()
+http_method_not_allowed()
+options()
+Example views.py:
+
+        from django.http import HttpResponse
+        from django.views import View
+
+        class MyView(View):
+
+            def get(self, request, *args, **kwargs):
+                return HttpResponse('Hello, World!')
+    
+    
+        Example urls.py:
+
+        from django.urls import path
+        from myapp.views import MyView
+
+        urlpatterns = [
+            path('mine/', MyView.as_view(), name='my-view'),
+        ]
+    
+    
+ ## 6). redirect()
+    
+    
+ By passing some object; that object’s get_absolute_url() method will be called to figure out the redirect URL:
+
+        from django.shortcuts import redirect
+
+                def my_view(request):
+                    ...
+                    obj = MyModel.objects.get(...)
+                    return redirect(obj)
+    
+    
+By passing the name of a view and optionally some positional or keyword arguments; the URL will be reverse resolved using the reverse() method:
+
+        def my_view(request):
+            ...
+            return redirect('some-view-name', foo='bar')
+By passing a hardcoded URL to redirect to:
+
+        def my_view(request):
+            ...
+            return redirect('/some/url/')
+This also works with full URLs:
+
+        def my_view(request):
+            ...
+            return redirect('https://example.com/')
+    
+By default, redirect() returns a temporary redirect. All of the above forms accept a permanent argument; if set to True a permanent redirect will be returned:
+
+        def my_view(request):
+            ...
+            obj = MyModel.objects.get(...)
+            return redirect(obj, permanent=True)   
+    
+
+## 7). django.contrib.humanize
+    
+    
+A set of Django template filters useful for adding a “human touch” to data.
+
+To activate these filters, add 'django.contrib.humanize' to your INSTALLED_APPS setting. Once you’ve done that, use {% load humanize %} in a template, and you’ll have access to the following filters.    
+    
+    
+apnumber:-
+    
+        1 becomes one.
+        2 becomes two.
+        10 becomes 10.
+    
+    
+intcomma:-
+    
+       4500 becomes 4,500.
+       4500.2 becomes 4,500.2.
+       45000 becomes 45,000.
+    
+    
+intword:-
+    
+        1000000 becomes 1.0 million.
+        1200000 becomes 1.2 million.
+    
+    
+naturalday:-
+    
+         Examples (when ‘today’ is 17 Feb 2007):
+
+        16 Feb 2007 becomes yesterday.
+        17 Feb 2007 becomes today.
+    
+    
+naturaltime
+    
+Examples (when ‘now’ is 17 Feb 2007 16:30:00):
+
+        17 Feb 2007 16:30:00 becomes now.
+        17 Feb 2007 16:29:31 becomes 29 seconds ago.
+        17 Feb 2007 16:29:00 becomes a minute ago.
+        17 Feb 2007 16:25:35 becomes 4 minutes ago    
+    
+ordinal
+    
+        1 becomes 1st.
+        2 becomes 2nd.
+        3 becomes 3rd.
