@@ -114,19 +114,21 @@ Only pull the data that you need.
     
 -> settings.py
     
-from django.contrib.messages import constants as messages
-MESSAGE_TAGS = {
+   from django.contrib.messages import constants as messages
+    
+   MESSAGE_TAGS = {
         messages.DEBUG: 'alert-secondary ',
         messages.INFO: 'alert-info ',
         messages.SUCCESS: 'alert-success ',
         messages.WARNING: 'alert-warning ',
         messages.ERROR: 'alert-danger ',
- }
+     }
  
  -> views.py   
     
- from django.contrib import messages 
- messages.success(request,  "Your account created successfully")
- return redirect('/')   
+     from django.contrib import messages
+    
+     messages.success(request,  "Your account created successfully")
+     return redirect('/')   
     
     
