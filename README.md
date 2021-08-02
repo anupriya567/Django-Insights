@@ -104,6 +104,7 @@ def redirect_to_year(request):
     
 It is good to use values() rather than retrieving the whole query set which might have hundreds of fields. 
 Only pull the data that you need.
+    
 -> views.py
     
     def order_list_view(request):
@@ -114,8 +115,6 @@ Only pull the data that you need.
 -> settings.py
     
 from django.contrib.messages import constants as messages
-
-managing django messages
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-secondary ',
         messages.INFO: 'alert-info ',
@@ -125,8 +124,8 @@ MESSAGE_TAGS = {
  }
  
  -> views.py   
- from django.contrib import messages 
     
+ from django.contrib import messages 
  messages.success(request,  "Your account created successfully")
  return redirect('/')   
     
