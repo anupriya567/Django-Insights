@@ -156,47 +156,9 @@ The above is equivalent to – but shorter, cleaner, and possibly faster than �
           {% endif %}
         </ul>
     
-## 5). Base views
+
     
-The following three classes provide much of the functionality needed to create Django views. You may think of them as parent views, which can be used by themselves or inherited from. They may not provide all the capabilities required for projects, in which case there are Mixins and Generic class-based views.
-
-Many of Django’s built-in class-based views inherit from other class-based views or various mixins. Because this inheritance chain is very important, the ancestor classes are documented under the section title of Ancestors (MRO). MRO is an acronym for Method Resolution Order.
-
-View
-    
-    
-class django.views.generic.base.View
-    
-The master class-based base view. All other class-based views inherit from this base class. It isn’t strictly a generic view and thus can also be imported from django.views.
-
-Method Flowchart
-
-setup()
-dispatch()
-http_method_not_allowed()
-options()
-Example views.py:
-
-        from django.http import HttpResponse
-        from django.views import View
-
-        class MyView(View):
-
-            def get(self, request, *args, **kwargs):
-                return HttpResponse('Hello, World!')
-    
-    
-        Example urls.py:
-
-        from django.urls import path
-        from myapp.views import MyView
-
-        urlpatterns = [
-            path('mine/', MyView.as_view(), name='my-view'),
-        ]
-    
-    
- ## 6). redirect()
+ ## 5). redirect()
     
     
  By passing some object; that object’s get_absolute_url() method will be called to figure out the redirect URL:
@@ -233,7 +195,7 @@ By default, redirect() returns a temporary redirect. All of the above forms acce
             return redirect(obj, permanent=True)   
     
 
-## 7). django.contrib.humanize
+## 6). django.contrib.humanize
     
     
 A set of Django template filters useful for adding a “human touch” to data.
@@ -283,3 +245,28 @@ ordinal
         1 becomes 1st.
         2 becomes 2nd.
         3 becomes 3rd.
+
+## 7). What is the difference between null=True and blank=True in Django?   
+    
+```null=True ```
+    sets ```NULL``` (versus NOT NULL) on the column in your DB. Blank values for Django field types such as DateTimeField or ForeignKey will be stored as NULL in the DB.
+
+blank determines whether the field will be required in forms. This includes the admin and your custom forms. If ```blank=True``` then the field will not be required, whereas if it's False the field cannot be blank.
+
+The combo of the two is so frequent because typically if you're going to allow a field to be blank in your form, you're going to also need your database to allow NULL values for that field. The exception is CharFields and TextFields, which in Django are never saved as NULL. Blank values are stored in the DB as an empty string ('').
+
+A few examples:
+```
+models.DateTimeField(blank=True) # raises IntegrityError if blank
+
+models.DateTimeField(null=True) # NULL allowed, but must be filled out in a form
+```
+Obviously, Those two options don't make logical sense to use (though there might be a use case for null=True, blank=False if you want a field to always be required in forms, optional when dealing with an object through something like the shell.)
+
+```    
+models.CharField(blank=True) # No problem, blank is stored as ''
+
+models.CharField(null=True) # NULL allowed, but will never be set as NULL
+ ```
+CHAR and TEXT types are never saved as NULL by Django, so null=True is unnecessary. However, you can manually set one of these fields to None to force set it as NULL. If you have a scenario where that might be necessary, you should still include null=True.   
+    
