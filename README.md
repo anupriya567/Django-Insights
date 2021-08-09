@@ -271,3 +271,10 @@ models.CharField(null=True) # NULL allowed, but will never be set as NULL
  ```
 CHAR and TEXT types are never saved as NULL by Django, so null=True is unnecessary. However, you can manually set one of these fields to None to force set it as NULL. If you have a scenario where that might be necessary, you should still include null=True.   
     
+## 7). By default Django is using sessions to register the user
+    
+    we can see session id here:
+    ![d1](https://user-images.githubusercontent.com/72871727/128699552-44227e91-d5ea-461b-953c-4140be2a4fe3.PNG)
+    
+    if we delete this id we get logged out
+![d2](https://user-images.githubusercontent.com/72871727/128699611-70ad05b0-0f49-469a-9dbc-6bc3f94cb937.PNG)
