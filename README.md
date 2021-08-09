@@ -274,7 +274,37 @@ CHAR and TEXT types are never saved as NULL by Django, so null=True is unnecessa
 ## 7). By default Django is using sessions to register the user
     
     we can see session id here:
-    ![d1](https://user-images.githubusercontent.com/72871727/128699552-44227e91-d5ea-461b-953c-4140be2a4fe3.PNG)
+![d1](https://user-images.githubusercontent.com/72871727/128700434-c4b18ef8-cbd3-4cab-b35f-0d3ba7c6710f.PNG)   
     
     if we delete this id we get logged out
-![d2](https://user-images.githubusercontent.com/72871727/128699611-70ad05b0-0f49-469a-9dbc-6bc3f94cb937.PNG)
+
+![d2](https://user-images.githubusercontent.com/72871727/128700398-7f89b050-00d6-4acf-9e7f-b834ee7a36cd.PNG)
+
+## 8). Django search functionality
+    
+ ```
+    class TaskList(LoginRequiredMixin, ListView):
+    model = Task
+    context_object_name = 'tasks'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = context['tasks'].filter(user=self.request.user)
+        context['count'] = context['tasks'].filter(complete=False).count()
+
+        search_input = self.request.GET.get('search-area') or ''
+        if search_input:
+            context['tasks'] = context['tasks'].filter(
+                title__contains=search_input)
+
+        context['search_input'] = search_input
+
+        return context
+ ```
+  search acc. to start of title-
+    ```
+   title__startswith = search_input
+    ```
+    
+    
+    
