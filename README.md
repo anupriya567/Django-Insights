@@ -11,33 +11,31 @@ At any moment we are free to change the path and the call will not break because
 Given a url pattern, Django uses url() to pick the right view and generate a page. That is, url--> view name. But sometimes, like when redirecting, you need to go in the reverse direction and give Django the name of a view, and Django generates the appropriate url. In other words, view name --> url. That is, reverse() (it's the reverse of the url function). It might seem more transparent to just call it generateUrlFromViewName but that's too long and probably not general enough:
 
 
-
-
 from django.urls import path
-
 from . import views
-
+```
 urlpatterns = [
     #...
     path('articles/<int:year>/', views.year_archive, name='news-year-archive'),
     #...
 ]
-
+```
 
 According to this design, the URL for the archive corresponding to year nnnn is /articles/<nnnn>/.
 You can obtain these in template code by using:
 
-    
+ ```   
 <a href="{% url 'news-year-archive' 2012 %}">2012 Archive</a>
 <ul>
 {% for yearvar in year_list %}
 <li><a href="{% url 'news-year-archive' yearvar %}">{{ yearvar }}Archive</a></li>
 {% endfor %}
 </ul>
+ ```
   
   
 Or in Python code:
-
+```
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -46,11 +44,11 @@ def redirect_to_year(request):
     year = 2006
     # ...
     return HttpResponseRedirect(reverse('news-year-archive', args=(year,)))
-  
- ...............................                                            
+```  
+                                           
     
 -> Create your models here. 
-    
+ ```   
     from django.urls import reverse
 
     class Course(models.Model):
@@ -73,9 +71,9 @@ def redirect_to_year(request):
                 'course_slug': self.course.slug,
                 'lesson_slug' : self.slug
             })
-  
+ ``` 
 -> urls.py
-  
+  ```
   from .views import CourseListView, CourseDetailView, LessonDetailView
 
   app_name = 'courses'
@@ -86,34 +84,34 @@ def redirect_to_year(request):
       path('<course_slug>/<lesson_slug>',
            LessonDetailView.as_view(), name='lesson-detail')
   ]
-  
+  ```
 -> course_detail.html
-  
+  ```
    {% for lesson in object.lessons %}
            <a href="{{ lesson.get_absolute_url }}">{{ lesson.title}}</a>
     {% endfor %}
-  
+ ``` 
 -> course_list.html
     
-    
+  ```  
   {%  for object in object_list %}
         <h2><a href="{{ object.get_absolute_url}} ">{{object}}</a></h2>
   {% endfor %}
-  
+ ``` 
 ## 2). Database Query Optimisation
     
 It is good to use values() rather than retrieving the whole query set which might have hundreds of fields. 
 Only pull the data that you need.
     
 -> views.py
-    
+ ```   
     def order_list_view(request):
          orders = Order.objects.values('number','price','quantity')
-    
+```    
 ## 3). Messages Framework
     
 -> settings.py
-    
+```    
    from django.contrib.messages import constants as messages
     
    MESSAGE_TAGS = {
@@ -123,19 +121,19 @@ Only pull the data that you need.
         messages.WARNING: 'alert-warning ',
         messages.ERROR: 'alert-danger ',
      }
- 
+ ```
  -> views.py   
-    
+  ``` 
      from django.contrib import messages
     
      messages.success(request,  "Your account created successfully")
      return redirect('/')   
-    
+  ```
 ##  4). for … empty
     
     
 The for tag can take an optional {% empty %} clause whose text is displayed if the given array is empty or could not be found:
-
+ ```
         <ul>
         {% for athlete in athlete_list %}
             <li>{{ athlete.name }}</li>
@@ -143,9 +141,9 @@ The for tag can take an optional {% empty %} clause whose text is displayed if t
             <li>Sorry, no athletes in this list.</li>
         {% endfor %}
         </ul>
-    
+ ```
 The above is equivalent to – but shorter, cleaner, and possibly faster than – the following:
-
+```
         <ul>
           {% if athlete_list %}
             {% for athlete in athlete_list %}
@@ -155,45 +153,48 @@ The above is equivalent to – but shorter, cleaner, and possibly faster than �
             <li>Sorry, no athletes in this list.</li>
           {% endif %}
         </ul>
-    
+   ``` 
 
     
  ## 5). redirect()
     
     
  By passing some object; that object’s get_absolute_url() method will be called to figure out the redirect URL:
-
+```
         from django.shortcuts import redirect
 
                 def my_view(request):
                     ...
                     obj = MyModel.objects.get(...)
                     return redirect(obj)
-    
+ ```   
     
 By passing the name of a view and optionally some positional or keyword arguments; the URL will be reverse resolved using the reverse() method:
-
+```
         def my_view(request):
             ...
             return redirect('some-view-name', foo='bar')
+```    
 By passing a hardcoded URL to redirect to:
-
+```
         def my_view(request):
             ...
             return redirect('/some/url/')
+```    
+    
 This also works with full URLs:
-
+```
         def my_view(request):
             ...
             return redirect('https://example.com/')
-    
+```    
 By default, redirect() returns a temporary redirect. All of the above forms accept a permanent argument; if set to True a permanent redirect will be returned:
-
+```
         def my_view(request):
             ...
             obj = MyModel.objects.get(...)
             return redirect(obj, permanent=True)   
-    
+ ```   
 
 ## 6). django.contrib.humanize
     
