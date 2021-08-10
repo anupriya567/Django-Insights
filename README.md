@@ -271,7 +271,7 @@ models.CharField(null=True) # NULL allowed, but will never be set as NULL
  ```
 CHAR and TEXT types are never saved as NULL by Django, so null=True is unnecessary. However, you can manually set one of these fields to None to force set it as NULL. If you have a scenario where that might be necessary, you should still include null=True.   
     
-## 7). By default Django is using sessions to register the user
+## 8). By default Django is using sessions to register the user
     
     we can see session id here:
 ![d1](https://user-images.githubusercontent.com/72871727/128700434-c4b18ef8-cbd3-4cab-b35f-0d3ba7c6710f.PNG)   
@@ -280,7 +280,7 @@ CHAR and TEXT types are never saved as NULL by Django, so null=True is unnecessa
 
 ![d2](https://user-images.githubusercontent.com/72871727/128700398-7f89b050-00d6-4acf-9e7f-b834ee7a36cd.PNG)
 
-## 8). Django search functionality
+## 9). Django search functionality
     
  ```
     class TaskList(LoginRequiredMixin, ListView):
@@ -305,6 +305,7 @@ CHAR and TEXT types are never saved as NULL by Django, so null=True is unnecessa
     ```
    title__startswith = search_input
     ```
-    
+ ## 10). [QuerySet API reference](https://docs.djangoproject.com/en/3.2/ref/models/querysets/)
+         Read this. Useful when fetching, filtering, fetching queries in sorted order etc.
     
     
