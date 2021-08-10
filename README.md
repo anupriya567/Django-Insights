@@ -308,4 +308,50 @@ CHAR and TEXT types are never saved as NULL by Django, so null=True is unnecessa
  ## 10). [QuerySet API reference](https://docs.djangoproject.com/en/3.2/ref/models/querysets/)
          Read this. Useful when fetching, filtering, fetching queries in sorted order etc.
     
+ ## 11). How to use template filters?
+     
+When and where to use??
+In HTML file you want to o/p something but atfer computing some logic
+so will make a python file perform login there and send o/p to html page and it will render data accordingly
+
+eg-  Checking whether the product is present in session cart or not 
+
+make a folder ** templatetags** ,  file in it say cart.py
     
+cart.py->    
+```   
+from django import template
+register = template.Library()
+
+@register.filter(name='is_in_cart')
+def is_in_cart(product  , cart):
+    keys = cart.keys()
+    for id in keys:
+        if int(id) == product.id:
+            return True
+    return False;
+    
+    @register.filter(name='cart_quantity')
+    def cart_quantity(product  , cart):
+        keys = cart.keys()
+        for id in keys:
+            if int(id) == product.id:
+                return cart.get(id)
+        return 0;
+ ```   
+    
+in html file->
+```
+         {% load cart %}
+            {% for product in products %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><img style="height: 80px;" class="rounded-circle" src="{{product.image.url}}" alt=""></td>
+                <td>{{product.name}}</td>
+                <td>{{product.price|currency}}</td>
+                <td>{{product|cart_quantity:request.session.cart}}</td>
+                <td>{{product|price_total:request.session.cart|currency}}</td>
+            </tr>
+
+            {% endfor %}
+```
