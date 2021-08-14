@@ -358,8 +358,12 @@ in html file->
 ## 12). Jinja2 is a modern day templating language for Python developers. 
 Why do we need Jinja 2?
 Sandboxed Execution: It provides a protected framework for automation of testing programs, whose behaviour is unknown and must be investigated.
+    
 HTML Escaping: Jinja 2 has a powerful automatic HTML Escaping, which helps preventing Cross-site Scripting (XSS Attack). There are special characters like >,<,&, etc. which carry special meanings in the templates. So, if you want to use them as regular text in your documents then, replace them with entities. Not doing so might lead to XSS-Attack.
+
 Template Inheritance:
+
+
  Delimiters
 {%....%} are for statements
 {{....}} are expressions used to print to template output
