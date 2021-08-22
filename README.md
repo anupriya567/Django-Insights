@@ -129,6 +129,18 @@ Only pull the data that you need.
      messages.success(request,  "Your account created successfully")
      return redirect('/')   
   ```
+    
+    Displaying messages
+
+```
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+```    
 ##  4). for … empty
     
     
