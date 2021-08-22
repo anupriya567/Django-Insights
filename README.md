@@ -141,6 +141,15 @@ Only pull the data that you need.
 </ul>
 {% endif %}
 ```    
+<!-- message alert -->
+```    
+{% for message in messages%}
+<div class="alert {{message.tags }}alert-dismissible fade show" role="alert">
+  <strong>Message: </strong> {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}    
+```    
 ##  4). for … empty
     
     
