@@ -130,7 +130,7 @@ Only pull the data that you need.
      return redirect('/')   
   ```
     
-    Displaying messages
+ -> Displaying messages
 
 ```
 {% if messages %}
