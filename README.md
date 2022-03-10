@@ -1,14 +1,14 @@
 ## Django Projects
-[taskmate- TodoList](https://github.com/anupriya567/taskmate/tree/master) <br />
-[LevelUp-Blog](https://github.com/anupriya567/LevelUp)<br />
-[Payment_Integration-Django](https://github.com/anupriya567/Payment_Integration-Django)<br />
-[BookStore-Django-Ajax](https://github.com/anupriya567/BookStore-Django-Ajax)<br />
-[Ibm-developer-skills-network-Quiz-App](https://github.com/anupriya567/ibm-developer-skills-network-Quiz-App)<br />
+1. [taskmate- TodoList](https://github.com/anupriya567/taskmate/tree/master) <br />
+2. [LevelUp-Blog](https://github.com/anupriya567/LevelUp)<br />
+3. [Payment_Integration-Django](https://github.com/anupriya567/Payment_Integration-Django)<br />
+4. [BookStore-Django-Ajax](https://github.com/anupriya567/BookStore-Django-Ajax)<br />
+5. [Ibm-developer-skills-network-Quiz-App](https://github.com/anupriya567/ibm-developer-skills-network-Quiz-App)<br />
 
 
 ## Django Rest FrameWork
-[IMDB-API-Clone-DjangoRestFramework](https://github.com/anupriya567/IMDB-API-Clone-DjangoRestFramework)<br />
-[LMS-Django-Rest-Framework](https://github.com/anupriya567/LMS-Django-Rest-Framework)<br />
+1. [IMDB-API-Clone-DjangoRestFramework](https://github.com/anupriya567/IMDB-API-Clone-DjangoRestFramework)<br />
+2. [LMS-Django-Rest-Framework](https://github.com/anupriya567/LMS-Django-Rest-Framework)<br />
 # Django-Insights
 
 ## 1). Reverse function where and why to use?
