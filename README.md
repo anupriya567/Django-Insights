@@ -8,7 +8,8 @@
 
 ## Django Rest FrameWork
 1. [IMDB-API-Clone-DjangoRestFramework](https://github.com/anupriya567/IMDB-API-Clone-DjangoRestFramework)<br />
-2. [LMS-Django-Rest-Framework](https://github.com/anupriya567/LMS-Django-Rest-Framework)<br />
+                               
+2. [LMS-Django-Rest-Framework](https://github.com/anupriya567/LMS-Django-Rest-Framework-)<br />
 # Django-Insights
 
 ## 1). Reverse function where and why to use?
