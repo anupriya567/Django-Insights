@@ -21,10 +21,10 @@ At any moment we are free to change the path and the call will not break because
 
 Given a url pattern, Django uses url() to pick the right view and generate a page. That is, url--> view name. But sometimes, like when redirecting, you need to go in the reverse direction and give Django the name of a view, and Django generates the appropriate url. In other words, view name --> url. That is, reverse() (it's the reverse of the url function). It might seem more transparent to just call it generateUrlFromViewName but that's too long and probably not general enough:
 
-
+```
 from django.urls import path
 from . import views
-```
+
 urlpatterns = [
     #...
     path('articles/<int:year>/', views.year_archive, name='news-year-archive'),
