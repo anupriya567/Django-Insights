@@ -406,3 +406,194 @@ Template Inheritance:
 Conditional Statement
 
 Template Inheritance
+
+
+
+# Class-based-View-Django
+
+## 1). Introduction to class-based views
+
+Using class-based views
+At its core, a class-based view allows you to respond to different HTTP request methods with different class instance methods, instead of with conditionally branching code inside a single view function.
+
+So where the code to handle HTTP GET in a view function would look something like:
+```
+from django.http import HttpResponse
+
+def my_view(request):
+    if request.method == 'GET':
+        # <view logic>
+        return HttpResponse('result')
+```        
+In a class-based view, this would become:
+
+```
+from django.http import HttpResponse
+from django.views import View
+
+class MyView(View):
+    def get(self, request):
+        # <view logic>
+        return HttpResponse('result')
+ ``` 
+  
+Because Django’s URL resolver expects to send the request and associated arguments to a callable function, not a class, class-based views have an as_view() class method which returns a function that can be called when a request arrives for a URL matching the associated pattern. The function creates an instance of the class, calls setup() to initialize its attributes, and then calls its dispatch() method. dispatch looks at the request to determine whether it is a GET, POST, etc, and relays the request to a matching method if one is defined, or raises HttpResponseNotAllowed if not:
+
+###### urls.py
+```
+from django.urls import path
+from myapp.views import MyView
+
+urlpatterns = [
+    path('about/', MyView.as_view()),
+]
+```
+## 2). [Built-in class-based views API](https://docs.djangoproject.com/en/3.2/ref/class-based-views/)
+
+## 3).  [What are Django class based views & should you use them?](https://www.dennisivy.com/post/django-class-based-views/)
+## 4). How to restrict the users from seeing data? How to show data of loggedin user only?
+
+in function based view we use decorators to restrict the view
+eg:  only loggedin user can see the data
+
+in class-based view will do this using mixins-
+```
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+class TaskList(LoginRequiredMixin, ListView):
+    model = Task
+    context_object_name = 'tasks'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = context['tasks'].filter(user=self.request.user)
+        context['count'] = context['tasks'].filter(complete=False).count()
+
+        search_input = self.request.GET.get('search-area') or ''
+        if search_input:
+            context['tasks'] = context['tasks'].filter(
+                title__contains=search_input)
+
+        context['search_input'] = search_input
+
+        return context![p1](https://user-images.githubusercontent.com/72871727/130781005-33ee377f-e550-4a3f-9b46-b0c289a09239.PNG)
+
+
+```
+```context['tasks']``` contains all tasks initially, then they are filtered acc. to loggedin user
+
+
+# Django Rest FrameWork
+
+-> error
+
+![e1](https://user-images.githubusercontent.com/72871727/130618275-7a55e589-ed60-43be-9964-15a7a15f7d1f.PNG)
+
+-> solve
+![e5](https://user-images.githubusercontent.com/72871727/130618309-46a349f7-4dbf-4640-bed1-496ba1b62199.PNG)
+
+-> for put request
+  error = id =1 pr update kiya h, but update nhi hua new object create ho gya id = 6 vala
+![e3](https://user-images.githubusercontent.com/72871727/130618253-68d00734-a144-40eb-8512-6ee32b5df17f.PNG)
+![e4](https://user-images.githubusercontent.com/72871727/130618271-9a3e5f09-298b-45b4-a630-9172e9055d2c.PNG)
+![e2](https://user-images.githubusercontent.com/72871727/130618260-fd8d96ce-2bef-4c57-9a9b-zzzzda5b48accf77.PNG)
+
+### Nested Serialization
+> As opposed to previously discussed references to another entity, the referred entity can instead also be embedded or nested in the representation of the object that refers to it. Such nested relationships can be expressed by using serializers as fields.
+![p1](https://user-images.githubusercontent.com/72871727/130781247-1856bada-ba9b-49d9-8f97-316ec7416e23.PNG)
+
+![p2](https://user-images.githubusercontent.com/72871727/130781073-4ec83ca1-5a8a-4fac-8b29-791b86ba0bb6.PNG)
+
+## Serialization Relations 
+
+##### Relational fields are used to represent model relationships. They can be applied to ForeignKey, ManyToManyField and OneToOneField relationships, as well as to reverse relationships, and custom relationships such as GenericForeignKey.
+
+> They can be applied to ForeignKey, ManyToManyField and OneToOneField relationships
+```
+models.py
+class Review(models.Model):
+    rating = models.PositiveIntegerField(validators=[MinValueValidator(1),MaxValueValidator(5)])
+    description = models.CharField(max_length=500)
+    watchlist = models.ForeignKey(WatchList, on_delete = models.CASCADE, related_name="reviews")
+    active = models.BooleanField(default="true")
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    review_user = models.ForeignKey(User, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return str(self.rating) + " | " + self.watchlist.title + " | " + str(self.review_user)
+```
+```
+serializer.py
+class ReviewSerializer(serializers.ModelSerializer): 
+    review_user = serializers.StringRelatedField(read_only = True)
+    class Meta:
+        model = Review
+        # fields = '__all__'
+        exclude = ('watchlist',)
+```        
+> applied to as well as to reverse relationships 
+```
+
+class StreamPlateform(models.Model):
+    name = models.CharField(max_length=50)
+    about = models.CharField(max_length=500)
+    website = models.URLField(default =True)
+
+    def __str__(self):
+        return self.name
+
+class WatchList(models.Model): 
+    title = models.CharField(max_length=50)
+    storyline = models.CharField(max_length=500)
+    plateform = models.ForeignKey(StreamPlateform, on_delete = models.CASCADE, related_name="watchlist")
+    active = models.BooleanField(default =True)
+    created = models.DateTimeField(auto_now_add=True)
+    avg_rating = models.FloatField(default = 0)
+    number_rating  = models.IntegerField(default = 0)
+
+    def __str__(self):
+        return self.title
+```
+
+```
+class StreamPlateformSerializer(serializers.ModelSerializer):
+    
+    # nested serialization
+    # watchlist =  WatchListSerializer(many=True, read_only=True)
+    watchlist = serializers.StringRelatedField(many=True)
+   
+    class Meta:
+        model = StreamPlateform
+        fields = '__all__'
+```
+![p4](https://user-images.githubusercontent.com/72871727/130781221-b142e4ec-ca23-4bdb-80b4-4ced154e14e9.PNG)
+
+![p3](https://user-images.githubusercontent.com/72871727/130781185-31ca6944-ec00-453a-92b5-a0a141c0ad23.PNG)
+![p5](https://user-images.githubusercontent.com/72871727/130781872-1b720702-64ae-47a8-9509-b71ec86340fe.PNG)
+
+![p6](https://user-images.githubusercontent.com/72871727/130781643-59044273-9b6a-4cc1-adfd-f4e82589b03c.PNG)
+![p7](https://user-images.githubusercontent.com/72871727/130781690-e48343e6-2cb7-4a59-9c02-ed4044fde6f8.PNG)
+![p8](https://user-images.githubusercontent.com/72871727/130781709-7d548a75-4315-4527-b028-22d355184ac5.PNG)
+![p10](https://user-images.githubusercontent.com/72871727/130781769-0831903a-c463-40a6-a51e-4bf738e0d6ff.PNG)
+![p11](https://user-images.githubusercontent.com/72871727/130781793-cf874d10-b18d-48d9-957a-d2e04468140b.PNG)
+
+
+
+
+-> error
+     view name and class name can't be same
+
+![image](https://user-images.githubusercontent.com/72871727/130780266-fc469931-1e72-479a-8c3f-189b264fb056.png)
+
+
+## Throttling
+
+```
+Throttling is similar to permissions, in that it determines if a request should be authorized. Throttles indicate a temporary state, and are used to control the rate of requests that clients can make to an API.
+```
+
+> Eg:
+How many images can you download from Freepik?
+
+As non registered user, you can download 3 images a day. As free user, you can download 10 images a day, and as premium user, you can download 100 images a day.
