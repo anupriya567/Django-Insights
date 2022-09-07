@@ -345,7 +345,7 @@ CHAR and TEXT types are never saved as NULL by Django, so null=True is unnecessa
      
 When and where to use??
 In HTML file you want to o/p something but atfer computing some logic
-so will make a python file perform login there and send o/p to html page and it will render data accordingly
+so will make a python file perform logic there and send o/p to html page and it will render data accordingly
 
 eg-  Checking whether the product is present in session cart or not 
 
