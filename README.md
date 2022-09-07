@@ -349,7 +349,7 @@ so will make a python file perform logic there and send o/p to html page and it 
 
 eg-  Checking whether the product is present in session cart or not 
 
-make a folder ** templatetags** ,  file in it say cart.py
+make a folder **templatetags** ,  file in it say cart.py
     
 cart.py->    
 ```   
