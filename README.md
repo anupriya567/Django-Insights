@@ -282,12 +282,19 @@ ordinal
 
 ## 7). What is the difference between null=True and blank=True in Django?   
     
-```null=True ```
-    sets ```NULL``` (versus NOT NULL) on the column in your DB. Blank values for Django field types such as DateTimeField or ForeignKey will be stored as NULL in the DB.
+  
+  ### null
+> If True, Django will store empty values as NULL in the database. Default is False.
+  ### blank
+> If True, the field is allowed to be blank. Default is False.
 
-blank determines whether the field will be required in forms. This includes the admin and your custom forms. If ```blank=True``` then the field will not be required, whereas if it's False the field cannot be blank.
+> Note that this is different than null. null is purely database-related, whereas blank is validation-related. If a field has blank=True, form validation will allow     entry of an empty value. If a field has blank=False, the field will be required.
+  ```null=True ```
+   ets ```NULL``` (versus NOT NULL) on the column in your DB. Blank values for Django field types such as DateTimeField or ForeignKey will be stored as NULL in the        DB.
 
-The combo of the two is so frequent because typically if you're going to allow a field to be blank in your form, you're going to also need your database to allow NULL values for that field. The exception is CharFields and TextFields, which in Django are never saved as NULL. Blank values are stored in the DB as an empty string ('').
+> blank determines whether the field will be required in forms. This includes the admin and your custom forms. If ```blank=True``` then the field will not be required,   whereas if it's False the field cannot be blank.
+
+> The combo of the two is so frequent because typically if you're going to allow a field to be blank in your form, you're going to also need your database to allow       NULL values for that field. The exception is CharFields and TextFields, which in Django are never saved as NULL. Blank values are stored in the DB as an empty string   ('').
 
 A few examples:
 ```
