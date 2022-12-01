@@ -414,6 +414,12 @@ Conditional Statement
 
 Template Inheritance
 
+## 13). using safe = false
+```
+return JsonResponse({'token': token, 'uid': uid}, safe=False) 
+```
+> setting the safe parameter to False actually influences JSON to receive any Python Data Type. 
+> Personally and professionally, it is advisable you set it the safe parameter to False because it makes JSON accept both {Dictionaries} and others.
 
 
 # Class-based-View-Django
