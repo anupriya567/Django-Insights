@@ -19,6 +19,26 @@
 
 * One of the key advantages of REST APIs is that they provide a great deal of flexibility. Data is not tied to resources or methods, so REST can handle multiple types of calls, return different data formats and even change structurally with the correct implementation of hypermedia.
 
+* The representational state transfer (REST) architecture is perhaps the most popular approach to building APIs. REST relies on a client/server approach that separates front and back ends of the API and provides considerable flexibility in development and implementation. REST is stateless, which means the API stores no data or status between requests. REST supports caching, which stores responses for slow or non-time-sensitive APIs. REST APIs, usually termed RESTful APIs, also can communicate directly or operate through intermediate systems such as API gateways and load balancers.
+
+
+### RPC
+The remote procedural call (RPC) protocol is a simple means to send multiple parameters and receive results. RPC APIs invoke executable actions or processes, while REST APIs mainly exchange data or resources such as documents. RPC can employ two different languages, JSON and XML, for coding; these APIs are dubbed JSON-RPC and XML-RPC, respectively.
+
+### SOAP
+The simple object access protocol (SOAP) is a messaging standard defined by the World Wide Web Consortium and broadly used to create web APIs, usually with XML. SOAP supports a wide range of communication protocols found across the internet, such as HTTP, SMTP and TCP/IP. SOAP is also extensible and style-independent, which enables developers to write SOAP APIs in varied ways and easily add features and functionality. The SOAP approach defines how the SOAP message is processed, the features and modules included, the communication protocol(s) supported and the construction of SOAP messages.
+
+Compared with the flexibility of REST, SOAP is a highly structured, tightly controlled and clearly defined standard. For example, SOAP messages can contain up to four components, including an envelope, header, body and fault -- the latter used for error handling.
+
+### Comparing API protocols
+* The choice of an API format can have a profound and long-lasting impact on the success and adoption of an API. Organizations must select the most appropriate format based on the complexity of the information that must be exchanged, the level of security needed around that information and the speed or performance required from those exchanges.
+
+* For example, a simpler format might be easier to code and maintain but might not offer the level of security that an enterprise adopter requires. More complex formats might provide that security but pose higher learning curves for adopters or require more bug fixes and work from developers. The tradeoff is rarely simple, but there are some common considerations for the major API formats.
+
+* Consider REST and SOAP. Both formats are designed to connect applications and mainly utilize HTTP protocols and commands such as Get, Post and Delete. Both can use XML in requests and responses. However, SOAP depends on XML by design, while REST can also use JSON, HTML and plain text. SOAP is standardized with strict rules, while REST allows flexibility in its rules and is instead governed by architectures. SOAP is built from remote procedure calls, while REST is based on resources.
+
+* Thus, both REST and SOAP exchange information, but do so in very different ways. SOAP is used when an enterprise requires tight security and clearly defined rules to support more complex data exchanges and the ability to call procedures. Developers frequently use SOAP for internal or partner APIs. REST is used for fast exchanges of relatively simple data. REST can also support greater scalability, supporting large and active user bases. These characteristics make REST popular for public APIs, such as in mobile applications.
+
 ### 2. Server
 server, network computer, computer program, or device that processes requests from a client (see client-server architecture). On the World Wide Web, for example, a Web server is a computer that uses the HTTP protocol to send Web pages to a client's computer when the client requests them.
 
