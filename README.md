@@ -12,6 +12,56 @@
 2. [LMS-Django-Rest-Framework](https://github.com/anupriya567/LMS-Django-Rest-Framework-)<br />
 # Django-Insights
 
+
+## Imp. Terms- 
+### 1. Rest Api
+* A REST API (also known as RESTful API) is an application programming interface (API or web API) that conforms to the constraints of REST architectural style and allows for interaction with RESTful web services
+
+* One of the key advantages of REST APIs is that they provide a great deal of flexibility. Data is not tied to resources or methods, so REST can handle multiple types of calls, return different data formats and even change structurally with the correct implementation of hypermedia.
+
+### 2. Server
+server, network computer, computer program, or device that processes requests from a client (see client-server architecture). On the World Wide Web, for example, a Web server is a computer that uses the HTTP protocol to send Web pages to a client's computer when the client requests them.
+
+
+### 3. JSON
+
+* JSON stands for JavaScript Object Notation
+* JSON is a lightweight data-interchange format
+* JSON is plain text written in JavaScript object notation
+* JSON is used to send data between computers
+* JSON is language independent
+
+>> Why Use JSON?
+* The JSON format is syntactically similar to the code for creating JavaScript objects. Because of this, a JavaScript program can easily convert JSON data into           JavaScript objects.
+
+* Since the format is text only, JSON data can easily be sent between computers, and used by any programming language.
+
+* JavaScript has a built in function for converting JSON strings into JavaScript objects:
+
+```
+JSON.parse()
+```
+* JavaScript also has a built in function for converting an object into a JSON string:
+
+```
+JSON.stringify()
+```
+
+## 4. Serialization
+
+* Serializers in Django REST Framework are responsible for converting objects into data types understandable by javascript and front-end frameworks.
+* Serializers also provide deserialization, allowing parsed data to be converted back into complex types, after first validating the incoming data.
+
+
+
+
+
+
+
+
+
+
+
 ## 1). Reverse function where and why to use?
 
 Use reverse instead of hardcoded uls. 
