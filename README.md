@@ -79,6 +79,23 @@ JSON.stringify()
 * It's a light, low-level “plugin” system for globally altering Django's input or output.
 * Each middleware component is responsible for doing some specific function.
 
+## 6. CSRF token 
+
+* A CSRF token is a secure random token (e.g., synchronizer token or challenge token) that is used to prevent CSRF attacks.
+* The token needs to be unique per user session and should be of large random value to make it difficult to guess.
+* A CSRF secure application assigns a unique CSRF token for every user session.
+
+### What is CSRF Attack?
+
+* Cross site request forgery (CSRF) is a vulnerability where an attacker performs actions while impersonating another user. 
+* For example, transferring funds to an attacker's account, changing a victim's email address, or they could even just redirect a pizza to an attacker's address!
+
+## 7. [How to use sessions?](https://docs.djangoproject.com/en/4.1/topics/http/sessions/#) 
+
+* The session framework lets you store and retrieve arbitrary data on a per-site-visitor basis. 
+* It stores data on the server side and abstracts the sending and receiving of cookies.
+* Cookies contain a session ID – not the data itself (unless you’re using the cookie based backend)
+
 
 
 
