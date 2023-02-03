@@ -131,6 +131,14 @@ JSON.stringify()
 {% endblock %}
 ```
 
+4. Delimiters
+
+```
+{%....%} are for statements
+{{....}} are expressions used to print to template output
+{#....#} are for comments which are not included in the template output
+#....## are used as line statements
+```
 
 
 
