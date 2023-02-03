@@ -96,6 +96,40 @@ JSON.stringify()
 * It stores data on the server side and abstracts the sending and receiving of cookies.
 * Cookies contain a session ID – not the data itself (unless you’re using the cookie based backend)
 
+## 8. Django Commands
+
+### python manage.py makemigrations
+
+* makemigrations basically generates the SQL commands for preinstalled apps (which can be viewed in installed apps in settings.py) and your newly created apps’ model. 
+* It does not execute those commands in your database file. 
+* So tables are not created after makemigrations.
+
+### python manage.py migrate 
+
+* migrate executes those SQL commands in the database file.
+* So after executing migrate all the tables of your installed apps are created in your database file.
+
+## 9. Jinja 2
+
+1. Sandboxed Execution: It provides a protected framework for automation of testing programs, whose behaviour is unknown and must be investigated.
+
+2. HTML Escaping: Jinja 2 has a powerful automatic HTML Escaping, which helps preventing Cross-site Scripting (XSS Attack). There are special characters like >,<,&, etc. which carry special meanings in the templates. So, if you want to use them as regular text in your documents then, replace them with entities. Not doing so might lead to XSS-Attack.
+
+3. Template Inheritance: This is the most important feature, which I will expand on to later in the post.
+
+>> Template Inheritance uses {% block %} tag to tell the template engine to override the common elements of your site via child templates. base.html is the parent template which is the basic layout and on which you can modify using the child templates, which is used to fill empty blocks with content. base.html is a general layout of the Web page.
+
+```
+{% extends “base.html” %}
+{% block title %} Index {% endblock %}
+{% block head %}
+ {{ super() }}
+{% endblock %}
+{% block body %}
+ <h1>Hello World</h1>
+ <p>Welcome to my site.</p>
+{% endblock %}
+```
 
 
 
