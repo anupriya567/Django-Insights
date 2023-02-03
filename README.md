@@ -73,6 +73,13 @@ JSON.stringify()
 * Serializers also provide deserialization, allowing parsed data to be converted back into complex types, after first validating the incoming data.
 
 
+## 5. [Middlewares](https://docs.djangoproject.com/en/4.1/topics/http/middleware/#)
+
+* Middleware is a framework of hooks into Django's request/response processing. 
+* It's a light, low-level “plugin” system for globally altering Django's input or output.
+* Each middleware component is responsible for doing some specific function.
+
+
 
 
 
