@@ -11,6 +11,7 @@
                                
 2. [LMS-Django-Rest-Framework](https://github.com/anupriya567/LMS-Django-Rest-Framework-)<br />
 # Django-Insights
+[coverletterEricsson.pdf](https://github.com/anupriya567/Django-Insights/files/10763154/coverletterEricsson.pdf)
 
 
 ## Imp. Terms- 
