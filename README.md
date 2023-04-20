@@ -14,9 +14,9 @@
 
 ## Imp. Terms- 
 ### 1. Rest Api
-* A REST API (also known as RESTful API) is an application programming interface (API or web API) that conforms to the constraints of REST architectural style and allows for interaction with RESTful web services
+* A REST API (also known as RESTful API) is an application programming interface (API or web API) that conforms to the constraints of REST architectural style 
 
-* One of the key advantages of REST APIs is that they provide a great deal of flexibility. Data is not tied to resources or methods, so REST can handle multiple types of calls, return different data formats and even change structurally with the correct implementation of hypermedia.
+* REST APIs is that they provide a great deal of flexibility. Data is not tied to resources or methods, so REST can handle multiple types of calls, return different data formats
 
 * The representational state transfer (REST) architecture is perhaps the most popular approach to building APIs. REST relies on a client/server approach that separates front and back ends of the API and provides considerable flexibility in development and implementation. REST is stateless, which means the API stores no data or status between requests. REST supports caching, which stores responses for slow or non-time-sensitive APIs. REST APIs, usually termed RESTful APIs, also can communicate directly or operate through intermediate systems such as API gateways and load balancers.
 
